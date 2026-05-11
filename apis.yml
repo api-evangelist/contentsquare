@@ -1,0 +1,77 @@
+aid: contentsquare
+name: Contentsquare
+description: >-
+  Contentsquare is a digital experience analytics platform that captures
+  every user interaction on web and mobile properties to surface friction
+  points, conversion blockers, and behavioral insights via session replay,
+  heatmaps, journey analysis, and zone-based analytics. The platform helps
+  product, marketing, and UX teams optimize digital experiences with
+  AI-driven recommendations. Contentsquare offers Data Export and
+  Enrichment REST APIs authenticated via OAuth 2.0 client credentials
+  with dynamic regional base URLs returned at authentication time.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Digital Experience Analytics
+  - Product Analytics
+  - Session Replay
+  - Heatmaps
+  - Customer Experience
+  - Conversion Optimization
+  - User Behavior
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/contentsquare/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: contentsquare:data-export-api
+    name: Contentsquare Data Export API
+    description: >-
+      REST API for exporting Contentsquare metrics and raw analytics data.
+      Authentication uses OAuth 2.0 client_credentials flow against
+      https://api.contentsquare.com/v1/oauth/token, which returns a JWT
+      access token valid for one hour plus a dynamic regional base URL
+      (for example https://api.eu-west-1.production.contentsquare.com).
+    humanURL: https://docs.contentsquare.com/en/api/export/
+    baseURL: https://api.eu-west-1.production.contentsquare.com
+    tags:
+      - Digital Experience Analytics
+      - Data Export
+      - Metrics
+      - OAuth
+    properties:
+      - type: Documentation
+        url: https://docs.contentsquare.com/en/api/export/
+      - type: Authentication
+        url: https://docs.contentsquare.com/en/api/export/authentication/
+  - aid: contentsquare:enrichment-api
+    name: Contentsquare Enrichment API
+    description: >-
+      REST API for sending enrichment data batches into Contentsquare,
+      enabling teams to merge first-party data with captured session
+      data. Uses the same OAuth 2.0 client credentials authentication
+      and dynamic regional base URLs as the Data Export API.
+    humanURL: https://docs.contentsquare.com/en/api/enrichment/
+    baseURL: https://enrichment-api.eu-west-1.production.contentsquare.com
+    tags:
+      - Digital Experience Analytics
+      - Data Enrichment
+      - OAuth
+    properties:
+      - type: Documentation
+        url: https://docs.contentsquare.com/en/api/enrichment/
+      - type: Sending Batches
+        url: https://docs.contentsquare.com/en/api/enrichment/sending-enrichment-data-batches-cs/
+common:
+  - type: Website
+    url: https://contentsquare.com
+  - type: Documentation
+    url: https://docs.contentsquare.com/en/
+  - type: Pricing
+    url: https://contentsquare.com/pricing/
+  - type: Sign Up
+    url: https://contentsquare.com/request-demo/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
