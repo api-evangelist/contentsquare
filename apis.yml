@@ -70,7 +70,7 @@ common:
     url: https://docs.contentsquare.com/en/
   - type: Pricing
     url: https://contentsquare.com/pricing/
-  - type: Sign Up
+  - type: SignUp
     url: https://contentsquare.com/request-demo/
 maintainers:
   - FN: Kin Lane
