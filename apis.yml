@@ -64,6 +64,10 @@ apis:
       - type: Sending Batches
         url: https://docs.contentsquare.com/en/api/enrichment/sending-enrichment-data-batches-cs/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/contentsquare
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/contentsquare
   - type: Website
     url: https://contentsquare.com
   - type: Documentation
