@@ -76,6 +76,8 @@ common:
     url: https://contentsquare.com/pricing/
   - type: SignUp
     url: https://contentsquare.com/request-demo/
+  - type: LLMsTxt
+    url: https://docs.contentsquare.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
