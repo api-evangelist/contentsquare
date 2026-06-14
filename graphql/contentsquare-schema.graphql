@@ -1,0 +1,929 @@
+"""
+ContentSquare GraphQL Schema
+Conceptual schema derived from the ContentSquare Digital Experience Analytics (DXA) platform.
+Source: https://developers.contentsquare.com/
+"""
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─────────────────────────────────────────────
+# Session & Visit
+# ─────────────────────────────────────────────
+
+"""A single user session on a web or mobile property."""
+type Session {
+  id: ID!
+  sessionId: String!
+  startedAt: DateTime!
+  endedAt: DateTime
+  durationSeconds: Int
+  pageViewCount: Int
+  visits: [Visit!]
+  device: Device
+  browser: Browser
+  platform: Platform
+  network: Network
+  country: Country
+  city: City
+  user: User
+  segments: [Segment!]
+  campaign: Campaign
+  customVariables: [CustomVariable!]
+  frictionScore: FrictionScore
+  errorReports: [ErrorReport!]
+  experienceTags: [ExperienceTag!]
+}
+
+"""A logical visit grouping one or more page views within a session."""
+type Visit {
+  id: ID!
+  visitId: String!
+  sessionId: String!
+  session: Session
+  startedAt: DateTime!
+  endedAt: DateTime
+  durationSeconds: Int
+  pageCount: Int
+  pages: [VisitPage!]
+  conversionRate: ConversionRate
+  bounced: Boolean
+}
+
+"""A single page entry within a visit, linking visit to page view metadata."""
+type VisitPage {
+  id: ID!
+  visitId: String!
+  visit: Visit
+  pageViewId: String!
+  pageView: PageView
+  entryPage: Boolean
+  exitPage: Boolean
+  timeSpentSeconds: Int
+  scrollDepthPercent: Float
+  pageTarget: PageTarget
+}
+
+"""A unique page view event with URL and interaction context."""
+type PageView {
+  id: ID!
+  pageViewId: String!
+  url: URL!
+  pageTitle: String
+  referrer: URL
+  timestamp: DateTime!
+  loadTime: LoadTime
+  zones: [Zone!]
+  zoneStats: [ZoneStats!]
+  heatmap: Heatmap
+  clickMap: ClickMap
+  scrollMap: ScrollMap
+  events: [Event!]
+  speedAnalysis: SpeedAnalysis
+}
+
+# ─────────────────────────────────────────────
+# Device & Environment
+# ─────────────────────────────────────────────
+
+"""The physical or virtual device used during a session."""
+type Device {
+  id: ID!
+  type: DeviceType!
+  brand: String
+  model: String
+  operatingSystem: String
+  osVersion: String
+  screenWidth: Int
+  screenHeight: Int
+  viewportWidth: Int
+  viewportHeight: Int
+  pixelRatio: Float
+  touchEnabled: Boolean
+}
+
+"""Browser metadata captured during the session."""
+type Browser {
+  id: ID!
+  name: String!
+  version: String
+  engine: String
+  language: String
+  cookiesEnabled: Boolean
+  javaScriptEnabled: Boolean
+  userAgent: String
+}
+
+"""Operating platform classification."""
+type Platform {
+  id: ID!
+  name: String!
+  type: PlatformType!
+  version: String
+}
+
+"""Network and connectivity context."""
+type Network {
+  id: ID!
+  connectionType: String
+  effectiveBandwidthKbps: Int
+  isp: String
+  ipAddress: String
+  isProxy: Boolean
+  isVPN: Boolean
+}
+
+# ─────────────────────────────────────────────
+# Geography
+# ─────────────────────────────────────────────
+
+"""Country-level geographic dimension."""
+type Country {
+  id: ID!
+  isoCode: String!
+  name: String!
+  continent: String
+  sessions: [Session!]
+}
+
+"""City-level geographic dimension."""
+type City {
+  id: ID!
+  name: String!
+  region: String
+  country: Country
+  latitude: Float
+  longitude: Float
+  sessions: [Session!]
+}
+
+# ─────────────────────────────────────────────
+# Identity & Segmentation
+# ─────────────────────────────────────────────
+
+"""A known or anonymous user identity tracked across sessions."""
+type User {
+  id: ID!
+  userId: String
+  anonymousId: String!
+  firstSeenAt: DateTime
+  lastSeenAt: DateTime
+  sessionCount: Int
+  segments: [Segment!]
+  customVariables: [CustomVariable!]
+  sessions: [Session!]
+}
+
+"""A behavioral or demographic segment grouping users."""
+type Segment {
+  id: ID!
+  name: String!
+  description: String
+  type: SegmentType!
+  filters: [Filter!]
+  userCount: Int
+  sessionCount: Int
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""An audience segment for cohort-level behavioral analysis."""
+type AudienceSegment {
+  id: ID!
+  name: String!
+  description: String
+  rules: JSON
+  filters: [Filter!]
+  matchedSessions: Int
+  matchedUsers: Int
+  conversionRate: ConversionRate
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A filter condition used to define segments and queries."""
+type Filter {
+  id: ID!
+  field: String!
+  operator: FilterOperator!
+  value: JSON!
+  label: String
+}
+
+# ─────────────────────────────────────────────
+# Zone Analytics
+# ─────────────────────────────────────────────
+
+"""A defined clickable or viewable zone on a page."""
+type Zone {
+  id: ID!
+  zoneId: String!
+  name: String!
+  selector: String
+  pageTarget: PageTarget
+  stats: ZoneStats
+  hover: ZoneHover
+  click: ZoneClick
+  exposure: ZoneExposure
+  mapping: CSZoneMapping
+  recap: ZoneRecap
+}
+
+"""Aggregate interaction statistics for a zone."""
+type ZoneStats {
+  zoneId: String!
+  zone: Zone
+  views: Int!
+  clicks: Int!
+  hovers: Int!
+  exposures: Int!
+  clickRate: Float
+  hoverRate: Float
+  exposureRate: Float
+  avgTimeToClickSeconds: Float
+  avgTimeHoveredSeconds: Float
+  revenuePerClick: Float
+  period: AnalysisPeriod
+}
+
+"""Hover interaction metrics for a zone."""
+type ZoneHover {
+  zoneId: String!
+  zone: Zone
+  hoverCount: Int!
+  uniqueHoverCount: Int!
+  hoverRate: Float
+  avgHoverDurationSeconds: Float
+  hoverBeforeClickRate: Float
+}
+
+"""Click interaction metrics for a zone."""
+type ZoneClick {
+  zoneId: String!
+  zone: Zone
+  clickCount: Int!
+  uniqueClickCount: Int!
+  clickRate: Float
+  attractionRate: Float
+  engagementRate: Float
+  bounceRate: Float
+  avgRevenuePerClick: Float
+}
+
+"""Exposure (in-viewport visibility) metrics for a zone."""
+type ZoneExposure {
+  zoneId: String!
+  zone: Zone
+  exposureCount: Int!
+  exposureRate: Float
+  avgExposureTimeSeconds: Float
+  exposureDepthPercent: Float
+}
+
+"""Mapping metadata connecting a zone selector to ContentSquare zone definitions."""
+type CSZoneMapping {
+  id: ID!
+  zoneId: String!
+  zone: Zone
+  cssSelector: String!
+  xpathSelector: String
+  pageTarget: PageTarget
+  createdAt: DateTime!
+  isActive: Boolean!
+}
+
+"""Summary recap statistics for a zone across a reporting period."""
+type ZoneRecap {
+  zoneId: String!
+  zone: Zone
+  period: AnalysisPeriod
+  totalClicks: Int!
+  totalHovers: Int!
+  totalExposures: Int!
+  clickThroughRate: Float
+  topSegments: [Segment!]
+  revenueImpact: RevenueImpact
+}
+
+# ─────────────────────────────────────────────
+# Heatmap & Maps
+# ─────────────────────────────────────────────
+
+"""Aggregated heatmap data for a page."""
+type Heatmap {
+  id: ID!
+  pageTarget: PageTarget!
+  period: AnalysisPeriod
+  deviceType: DeviceType
+  clickMapData: ClickMapData
+  scrollMapData: ScrollMapData
+  sessionCount: Int
+  generatedAt: DateTime!
+}
+
+"""Click heatmap overlay for a specific page."""
+type ClickMap {
+  id: ID!
+  pageTarget: PageTarget!
+  period: AnalysisPeriod
+  deviceType: DeviceType
+  data: ClickMapData
+  zones: [ZoneClick!]
+  totalClicks: Int
+  generatedAt: DateTime!
+}
+
+"""Scroll depth heatmap overlay for a specific page."""
+type ScrollMap {
+  id: ID!
+  pageTarget: PageTarget!
+  period: AnalysisPeriod
+  deviceType: DeviceType
+  data: ScrollMapData
+  avgScrollDepthPercent: Float
+  foldPosition: Int
+  generatedAt: DateTime!
+}
+
+"""Raw data points for click map rendering."""
+type ClickMapData {
+  points: [ClickPoint!]!
+  maxClickCount: Int
+  totalClicks: Int
+}
+
+"""Raw data points for scroll map rendering."""
+type ScrollMapData {
+  depthBuckets: [ScrollDepthBucket!]!
+  avgDepthPercent: Float
+  reachedBottomPercent: Float
+}
+
+"""A single click coordinate and count."""
+type ClickPoint {
+  x: Float!
+  y: Float!
+  count: Int!
+  relativeX: Float
+  relativeY: Float
+}
+
+"""A scroll depth bucket representing percentage of users who scrolled to a depth."""
+type ScrollDepthBucket {
+  depthPercent: Int!
+  usersReachedPercent: Float!
+  pixelDepth: Int
+}
+
+# ─────────────────────────────────────────────
+# Conversion & Events
+# ─────────────────────────────────────────────
+
+"""Conversion rate statistics for a segment, page, or zone."""
+type ConversionRate {
+  id: ID!
+  value: Float!
+  sessions: Int!
+  conversions: Int!
+  period: AnalysisPeriod
+  segment: Segment
+  pageTarget: PageTarget
+}
+
+"""A trigger condition that fires an event in response to user behavior."""
+type EventTrigger {
+  id: ID!
+  name: String!
+  description: String
+  triggerType: TriggerType!
+  conditions: [Filter!]
+  events: [Event!]
+  isActive: Boolean!
+  createdAt: DateTime!
+}
+
+"""A behavioral or business event captured during a session."""
+type Event {
+  id: ID!
+  eventId: String!
+  sessionId: String!
+  pageViewId: String
+  name: String!
+  category: String
+  value: Float
+  currency: String
+  timestamp: DateTime!
+  properties: JSON
+  trigger: EventTrigger
+}
+
+"""A custom variable attached to a session or user for enrichment."""
+type CustomVariable {
+  id: ID!
+  name: String!
+  value: String!
+  scope: CustomVariableScope!
+  sessionId: String
+  userId: String
+}
+
+# ─────────────────────────────────────────────
+# Targeting
+# ─────────────────────────────────────────────
+
+"""A URL pattern or page definition used to scope analytics."""
+type PageTarget {
+  id: ID!
+  name: String!
+  urlPattern: String!
+  matchType: UrlMatchType!
+  pageGroup: String
+  tags: [String!]
+  zones: [Zone!]
+}
+
+# ─────────────────────────────────────────────
+# Analysis
+# ─────────────────────────────────────────────
+
+"""A saved analytics analysis configuration."""
+type Analysis {
+  id: ID!
+  name: String!
+  description: String
+  type: AnalysisType!
+  pageTarget: PageTarget
+  segment: AudienceSegment
+  period: AnalysisPeriod
+  filters: [Filter!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+  createdBy: String
+}
+
+"""Funnel analysis tracking user progression through a defined sequence of steps."""
+type FunnelAnalysis {
+  id: ID!
+  name: String!
+  description: String
+  steps: [FunnelStep!]!
+  segment: AudienceSegment
+  period: AnalysisPeriod
+  totalEntries: Int
+  completionRate: Float
+  avgCompletionTimeSeconds: Float
+  revenueImpact: RevenueImpact
+  createdAt: DateTime!
+}
+
+"""A single step within a funnel analysis."""
+type FunnelStep {
+  id: ID!
+  funnelId: String!
+  stepNumber: Int!
+  name: String!
+  pageTarget: PageTarget
+  eventName: String
+  usersReached: Int!
+  dropOffCount: Int
+  dropOffRate: Float
+  conversionRate: Float
+  avgTimeToNextStepSeconds: Float
+}
+
+"""Journey analysis tracing multi-page navigation patterns."""
+type JourneyAnalysis {
+  id: ID!
+  name: String!
+  startPage: PageTarget
+  endPage: PageTarget
+  segment: AudienceSegment
+  period: AnalysisPeriod
+  topPaths: [JourneyPath!]
+  avgPathLength: Float
+  totalSessions: Int
+  createdAt: DateTime!
+}
+
+"""A single navigational path within a journey analysis."""
+type JourneyPath {
+  id: ID!
+  journeyId: String!
+  pages: [PageTarget!]!
+  sessionCount: Int!
+  conversionRate: Float
+  avgDurationSeconds: Float
+}
+
+"""Impact analysis connecting behavioral metrics to business KPIs."""
+type ImpactAnalysis {
+  id: ID!
+  name: String!
+  description: String
+  metric: String!
+  impactedElement: String
+  pageTarget: PageTarget
+  segment: AudienceSegment
+  period: AnalysisPeriod
+  impactScore: Float
+  revenueImpact: RevenueImpact
+  frictionScore: FrictionScore
+  recommendations: [String!]
+  createdAt: DateTime!
+}
+
+"""Revenue impact estimation tied to UX friction or conversion changes."""
+type RevenueImpact {
+  id: ID!
+  estimatedRevenueLost: Float
+  estimatedRevenueGained: Float
+  currency: String!
+  affectedSessions: Int
+  period: AnalysisPeriod
+  confidence: Float
+  methodology: String
+}
+
+# ─────────────────────────────────────────────
+# UX & Errors
+# ─────────────────────────────────────────────
+
+"""360-degree UX view aggregating all analytics dimensions for a page or session."""
+type UX360 {
+  id: ID!
+  pageTarget: PageTarget
+  segment: AudienceSegment
+  period: AnalysisPeriod
+  frictionScore: FrictionScore
+  speedAnalysis: SpeedAnalysis
+  conversionRate: ConversionRate
+  topZones: [ZoneStats!]
+  errorReports: [ErrorReport!]
+  revenueImpact: RevenueImpact
+  generatedAt: DateTime!
+}
+
+"""A JavaScript error or rage-click friction report captured in a session."""
+type ErrorReport {
+  id: ID!
+  sessionId: String!
+  pageViewId: String
+  errorType: ErrorType!
+  message: String
+  stackTrace: String
+  timestamp: DateTime!
+  count: Int
+  affectedSessions: Int
+  frictionScore: FrictionScore
+}
+
+"""A friction score quantifying user struggle on a page or element."""
+type FrictionScore {
+  id: ID!
+  score: Float!
+  grade: FrictionGrade!
+  rageclicks: Int
+  errorClicks: Int
+  hesitations: Int
+  scrollBackCount: Int
+  exposureWithoutClickRate: Float
+  pageTarget: PageTarget
+  period: AnalysisPeriod
+}
+
+# ─────────────────────────────────────────────
+# Performance
+# ─────────────────────────────────────────────
+
+"""Page speed and performance analysis for a page target."""
+type SpeedAnalysis {
+  id: ID!
+  pageTarget: PageTarget
+  period: AnalysisPeriod
+  deviceType: DeviceType
+  avgLoadTimeMs: Int
+  medianLoadTimeMs: Int
+  p75LoadTimeMs: Int
+  p95LoadTimeMs: Int
+  loadTime: LoadTime
+  slowSessionPercent: Float
+  impactOnConversion: Float
+}
+
+"""Detailed page load timing metrics."""
+type LoadTime {
+  id: ID!
+  pageViewId: String
+  dnsLookupMs: Int
+  tcpConnectionMs: Int
+  serverResponseMs: Int
+  domContentLoadedMs: Int
+  fullPageLoadMs: Int
+  firstContentfulPaintMs: Int
+  largestContentfulPaintMs: Int
+  timeToInteractiveMs: Int
+  cumulativeLayoutShift: Float
+}
+
+# ─────────────────────────────────────────────
+# Campaign Attribution
+# ─────────────────────────────────────────────
+
+"""UTM campaign attribution attached to a session."""
+type Campaign {
+  id: ID!
+  name: String
+  source: Source
+  medium: Medium
+  term: Term
+  content: Content
+  campaignSource: CampaignSource
+  sessionCount: Int
+  conversionRate: Float
+  revenueImpact: RevenueImpact
+}
+
+"""Raw campaign source metadata grouping sessions by origin."""
+type CampaignSource {
+  id: ID!
+  utmSource: String
+  utmMedium: String
+  utmCampaign: String
+  utmTerm: String
+  utmContent: String
+  sessions: [Session!]
+  conversionRate: ConversionRate
+}
+
+"""Marketing traffic source dimension."""
+type Source {
+  id: ID!
+  name: String!
+  sessions: [Session!]
+  conversionRate: Float
+}
+
+"""Marketing traffic medium dimension."""
+type Medium {
+  id: ID!
+  name: String!
+  sessions: [Session!]
+  conversionRate: Float
+}
+
+"""Search term or keyword dimension for paid and organic campaigns."""
+type Term {
+  id: ID!
+  keyword: String!
+  matchType: String
+  sessions: [Session!]
+  conversionRate: Float
+}
+
+"""Ad creative or content variant dimension."""
+type Content {
+  id: ID!
+  name: String!
+  variant: String
+  sessions: [Session!]
+  conversionRate: Float
+}
+
+# ─────────────────────────────────────────────
+# Tagging & Auth
+# ─────────────────────────────────────────────
+
+"""An experience tag applied to sessions or page views for categorization."""
+type ExperienceTag {
+  id: ID!
+  name: String!
+  value: String
+  color: String
+  sessions: [Session!]
+  createdAt: DateTime!
+}
+
+"""An API key credential for authenticating with ContentSquare APIs."""
+type APIKey {
+  id: ID!
+  keyId: String!
+  name: String!
+  scopes: [String!]!
+  createdAt: DateTime!
+  expiresAt: DateTime
+  lastUsedAt: DateTime
+  isActive: Boolean!
+  createdBy: String
+}
+
+"""An OAuth 2.0 access token returned by the client_credentials flow."""
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int!
+  scope: String
+  regionalBaseUrl: URL!
+  issuedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Supporting Types
+# ─────────────────────────────────────────────
+
+"""A date range for scoping analytics queries."""
+type AnalysisPeriod {
+  startDate: DateTime!
+  endDate: DateTime!
+  granularity: TimeGranularity
+}
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum DeviceType {
+  DESKTOP
+  MOBILE
+  TABLET
+  OTHER
+}
+
+enum PlatformType {
+  WEB
+  IOS
+  ANDROID
+  OTHER
+}
+
+enum SegmentType {
+  BEHAVIORAL
+  DEMOGRAPHIC
+  TECHNOGRAPHIC
+  CUSTOM
+}
+
+enum FilterOperator {
+  EQUALS
+  NOT_EQUALS
+  CONTAINS
+  NOT_CONTAINS
+  STARTS_WITH
+  ENDS_WITH
+  GREATER_THAN
+  LESS_THAN
+  IN
+  NOT_IN
+  IS_NULL
+  IS_NOT_NULL
+}
+
+enum TriggerType {
+  PAGE_LOAD
+  CLICK
+  SCROLL
+  HOVER
+  FORM_SUBMIT
+  CUSTOM_EVENT
+  TIME_ON_PAGE
+  EXIT_INTENT
+}
+
+enum CustomVariableScope {
+  SESSION
+  PAGE
+  USER
+  VISIT
+}
+
+enum UrlMatchType {
+  EXACT
+  CONTAINS
+  STARTS_WITH
+  ENDS_WITH
+  REGEX
+}
+
+enum AnalysisType {
+  FUNNEL
+  JOURNEY
+  IMPACT
+  ZONE
+  HEATMAP
+  CUSTOM
+}
+
+enum ErrorType {
+  JAVASCRIPT_ERROR
+  RAGE_CLICK
+  ERROR_CLICK
+  DEAD_CLICK
+  HTTP_ERROR
+  NETWORK_ERROR
+}
+
+enum FrictionGrade {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum TimeGranularity {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+}
+
+# ─────────────────────────────────────────────
+# Root Types
+# ─────────────────────────────────────────────
+
+type Query {
+  session(id: ID!): Session
+  sessions(filters: [Filter!], period: AnalysisPeriod, limit: Int, offset: Int): [Session!]
+
+  visit(id: ID!): Visit
+  visits(sessionId: ID, filters: [Filter!], period: AnalysisPeriod, limit: Int, offset: Int): [Visit!]
+
+  pageView(id: ID!): PageView
+  pageViews(pageTargetId: ID, filters: [Filter!], period: AnalysisPeriod, limit: Int, offset: Int): [PageView!]
+
+  user(id: ID!): User
+  users(segmentId: ID, filters: [Filter!], limit: Int, offset: Int): [User!]
+
+  segment(id: ID!): Segment
+  segments: [Segment!]
+
+  audienceSegment(id: ID!): AudienceSegment
+  audienceSegments: [AudienceSegment!]
+
+  zone(id: ID!): Zone
+  zones(pageTargetId: ID): [Zone!]
+
+  zoneStats(zoneId: ID!, period: AnalysisPeriod, segment: ID): ZoneStats
+  heatmap(pageTargetId: ID!, period: AnalysisPeriod, deviceType: DeviceType): Heatmap
+  clickMap(pageTargetId: ID!, period: AnalysisPeriod, deviceType: DeviceType): ClickMap
+  scrollMap(pageTargetId: ID!, period: AnalysisPeriod, deviceType: DeviceType): ScrollMap
+
+  funnelAnalysis(id: ID!): FunnelAnalysis
+  funnelAnalyses(filters: [Filter!]): [FunnelAnalysis!]
+
+  journeyAnalysis(id: ID!): JourneyAnalysis
+  journeyAnalyses(filters: [Filter!]): [JourneyAnalysis!]
+
+  impactAnalysis(id: ID!): ImpactAnalysis
+  impactAnalyses(pageTargetId: ID, segmentId: ID, period: AnalysisPeriod): [ImpactAnalysis!]
+
+  ux360(pageTargetId: ID!, segmentId: ID, period: AnalysisPeriod): UX360
+
+  errorReports(sessionId: ID, pageTargetId: ID, errorType: ErrorType, period: AnalysisPeriod, limit: Int): [ErrorReport!]
+
+  frictionScore(pageTargetId: ID!, period: AnalysisPeriod, deviceType: DeviceType): FrictionScore
+
+  speedAnalysis(pageTargetId: ID!, period: AnalysisPeriod, deviceType: DeviceType): SpeedAnalysis
+
+  campaign(id: ID!): Campaign
+  campaigns(period: AnalysisPeriod, filters: [Filter!]): [Campaign!]
+
+  pageTarget(id: ID!): PageTarget
+  pageTargets: [PageTarget!]
+
+  apiKeys: [APIKey!]
+  apiKey(id: ID!): APIKey
+}
+
+type Mutation {
+  createSegment(name: String!, description: String, type: SegmentType!, filters: [ID!]): Segment
+  updateSegment(id: ID!, name: String, description: String, filters: [ID!]): Segment
+  deleteSegment(id: ID!): Boolean
+
+  createAudienceSegment(name: String!, description: String, rules: JSON): AudienceSegment
+  updateAudienceSegment(id: ID!, name: String, description: String, rules: JSON): AudienceSegment
+  deleteAudienceSegment(id: ID!): Boolean
+
+  createFilter(field: String!, operator: FilterOperator!, value: JSON!, label: String): Filter
+  deleteFilter(id: ID!): Boolean
+
+  createPageTarget(name: String!, urlPattern: String!, matchType: UrlMatchType!, pageGroup: String): PageTarget
+  updatePageTarget(id: ID!, name: String, urlPattern: String, matchType: UrlMatchType): PageTarget
+  deletePageTarget(id: ID!): Boolean
+
+  createEventTrigger(name: String!, triggerType: TriggerType!, conditions: [ID!]): EventTrigger
+  updateEventTrigger(id: ID!, name: String, isActive: Boolean): EventTrigger
+  deleteEventTrigger(id: ID!): Boolean
+
+  createFunnelAnalysis(name: String!, stepPageTargetIds: [ID!]!, segmentId: ID, period: AnalysisPeriod): FunnelAnalysis
+  deleteFunnelAnalysis(id: ID!): Boolean
+
+  createJourneyAnalysis(name: String!, startPageId: ID, endPageId: ID, segmentId: ID, period: AnalysisPeriod): JourneyAnalysis
+  deleteJourneyAnalysis(id: ID!): Boolean
+
+  createAPIKey(name: String!, scopes: [String!]!): APIKey
+  revokeAPIKey(id: ID!): Boolean
+
+  addCustomVariable(sessionId: ID, userId: ID, name: String!, value: String!, scope: CustomVariableScope!): CustomVariable
+
+  tagExperience(sessionId: ID!, tagName: String!, tagValue: String): ExperienceTag
+}
