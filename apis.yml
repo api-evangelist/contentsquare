@@ -8,7 +8,7 @@ description: Contentsquare is a digital experience analytics platform that captu
   offers Data Export and Enrichment REST APIs authenticated via OAuth 2.0 client credentials
   with dynamic regional base URLs returned at authentication time.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Digital Experience Analytics
 - Product Analytics
