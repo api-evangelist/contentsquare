@@ -70,9 +70,9 @@ common:
   url: https://docs.contentsquare.com/en/
 - type: Pricing
   url: https://contentsquare.com/pricing/
-- type: SignUp
+- type: Signup
   url: https://contentsquare.com/request-demo/
-- type: LLMsTxt
+- type: LlmsText
   url: https://docs.contentsquare.com/llms.txt
 maintainers:
 - FN: Kin Lane
