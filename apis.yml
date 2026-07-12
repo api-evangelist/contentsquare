@@ -60,6 +60,14 @@ apis:
   - type: Sending Batches
     url: https://docs.contentsquare.com/en/api/enrichment/sending-enrichment-data-batches-cs/
 common:
+- type: TrustCenter
+  url: security/contentsquare-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/contentsquare-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/contentsquare-domain-security.yml
+- type: Authentication
+  url: authentication/contentsquare-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/contentsquare
 - type: LinkedIn
