@@ -60,6 +60,8 @@ apis:
   - type: Sending Batches
     url: https://docs.contentsquare.com/en/api/enrichment/sending-enrichment-data-batches-cs/
 common:
+- type: AgenticAccess
+  url: agentic-access/contentsquare-agentic-access.yml
 - type: TrustCenter
   url: security/contentsquare-trust-center.yml
 - type: VulnerabilityDisclosure
