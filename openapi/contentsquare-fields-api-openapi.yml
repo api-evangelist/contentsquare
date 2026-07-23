@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Contentsquare Data Export Authentication Fields API
+  description: 'The Contentsquare Data Export API lets you programmatically create export
+
+    jobs and retrieve exported files for pageview-level or session-level raw
+
+    data. Authentication uses server-to-server OAuth 2.0 (client_credentials)
+
+    and the access token (Bearer) returned at authentication time must be sent
+
+    on every subsequent request.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Contentsquare Developer Documentation
+    url: https://docs.contentsquare.com/en/api/export/
+servers:
+- url: https://api.contentsquare.com
+  description: Contentsquare API (regional base URL returned at authentication)
+security:
+- bearerAuth: []
+tags:
+- name: Fields
+paths:
+  /v1/exportable-fields:
+    get:
+      tags:
+      - Fields
+      summary: List exportable fields for a scope
+      parameters:
+      - in: query
+        name: scope
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+  /v1/custom-vars:
+    get:
+      tags:
+      - Fields
+      summary: List custom variables defined for the project
+      responses:
+        '200':
+          description: OK
+  /v1/dynamic-var-keys:
+    get:
+      tags:
+      - Fields
+      summary: List dynamic variable keys captured in a window
+      parameters:
+      - in: query
+        name: from
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: to
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

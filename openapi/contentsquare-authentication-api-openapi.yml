@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: Contentsquare Data Export Authentication API
+  description: 'The Contentsquare Data Export API lets you programmatically create export
+
+    jobs and retrieve exported files for pageview-level or session-level raw
+
+    data. Authentication uses server-to-server OAuth 2.0 (client_credentials)
+
+    and the access token (Bearer) returned at authentication time must be sent
+
+    on every subsequent request.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Contentsquare Developer Documentation
+    url: https://docs.contentsquare.com/en/api/export/
+servers:
+- url: https://api.contentsquare.com
+  description: Contentsquare API (regional base URL returned at authentication)
+security:
+- bearerAuth: []
+tags:
+- name: Authentication
+paths:
+  /v1/oauth/token:
+    post:
+      tags:
+      - Authentication
+      summary: Obtain an OAuth 2.0 access token
+      description: 'Exchange client credentials for a short-lived (1 hour) bearer token used
+
+        on all subsequent API calls. The response also includes the regional
+
+        base URL to use for subsequent requests.
+
+        '
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - client_id
+              - client_secret
+              - grant_type
+              properties:
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+                scope:
+                  type: string
+                  example: data-export
+                project_id:
+                  type: string
+                  description: Required only for account-level credentials
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+                  scope:
+                    type: string
+                  project_id:
+                    type: string
+                  api_base_url:
+                    type: string
+                    format: uri
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

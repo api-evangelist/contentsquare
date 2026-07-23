@@ -1,0 +1,174 @@
+openapi: 3.1.0
+info:
+  title: Contentsquare Data Export Authentication Exports API
+  description: 'The Contentsquare Data Export API lets you programmatically create export
+
+    jobs and retrieve exported files for pageview-level or session-level raw
+
+    data. Authentication uses server-to-server OAuth 2.0 (client_credentials)
+
+    and the access token (Bearer) returned at authentication time must be sent
+
+    on every subsequent request.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Contentsquare Developer Documentation
+    url: https://docs.contentsquare.com/en/api/export/
+servers:
+- url: https://api.contentsquare.com
+  description: Contentsquare API (regional base URL returned at authentication)
+security:
+- bearerAuth: []
+tags:
+- name: Exports
+paths:
+  /v1/exports:
+    get:
+      tags:
+      - Exports
+      summary: List export jobs
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - JSONL
+          - CSV
+      - in: query
+        name: frequency
+        schema:
+          type: string
+      - in: query
+        name: scope
+        schema:
+          type: string
+      - in: query
+        name: state
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 20
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: order
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A page of export jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportJobList'
+    post:
+      tags:
+      - Exports
+      summary: Create an export job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportJobRequest'
+      responses:
+        '201':
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportJob'
+  /v1/exports/{jobId}:
+    get:
+      tags:
+      - Exports
+      summary: Retrieve a single export job
+      parameters:
+      - in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Export job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportJob'
+components:
+  schemas:
+    ExportJob:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - JSONL
+          - CSV
+        scope:
+          type: string
+        frequency:
+          type: string
+        state:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    ExportJobRequest:
+      type: object
+      required:
+      - name
+      - format
+      - scope
+      properties:
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - JSONL
+          - CSV
+        scope:
+          type: string
+        frequency:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+        deviceLabel:
+          type: string
+        segmentId:
+          type: string
+    ExportJobList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportJob'
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

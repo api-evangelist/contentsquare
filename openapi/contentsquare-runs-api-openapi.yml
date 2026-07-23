@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Contentsquare Data Export Authentication Runs API
+  description: 'The Contentsquare Data Export API lets you programmatically create export
+
+    jobs and retrieve exported files for pageview-level or session-level raw
+
+    data. Authentication uses server-to-server OAuth 2.0 (client_credentials)
+
+    and the access token (Bearer) returned at authentication time must be sent
+
+    on every subsequent request.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Contentsquare Developer Documentation
+    url: https://docs.contentsquare.com/en/api/export/
+servers:
+- url: https://api.contentsquare.com
+  description: Contentsquare API (regional base URL returned at authentication)
+security:
+- bearerAuth: []
+tags:
+- name: Runs
+paths:
+  /v1/exports/successful-runs:
+    get:
+      tags:
+      - Runs
+      summary: List successful job runs across all jobs
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: order
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+  /v1/exports/{jobId}/runs:
+    get:
+      tags:
+      - Runs
+      summary: List runs for a job
+      parameters:
+      - in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: page
+        schema:
+          type: integer
+      - in: query
+        name: order
+        schema:
+          type: string
+      - in: query
+        name: state
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+  /v1/exports/{jobId}/runs/{runId}:
+    get:
+      tags:
+      - Runs
+      summary: Retrieve a specific job run (with file download URLs)
+      parameters:
+      - in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: runId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Run details and signed download URLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  state:
+                    type: string
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          format: uri
+                        expires_at:
+                          type: string
+                          format: date-time
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
