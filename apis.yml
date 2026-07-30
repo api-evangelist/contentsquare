@@ -8,7 +8,19 @@ description: Contentsquare is a digital experience analytics platform that captu
   offers Data Export and Enrichment REST APIs authenticated via OAuth 2.0 client credentials
   with dynamic regional base URLs returned at authentication time.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/contentsquare.png
 tags:
 - Digital Experience Analytics
 - Product Analytics
@@ -24,10 +36,10 @@ specificationVersion: '0.19'
 apis:
 - aid: contentsquare:data-export-api
   name: Contentsquare Data Export API
-  description: REST API for exporting Contentsquare metrics and raw analytics data.
-    Authentication uses OAuth 2.0 client_credentials flow against https://api.contentsquare.com/v1/oauth/token,
-    which returns a JWT access token valid for one hour plus a dynamic regional base
-    URL (for example https://api.eu-west-1.production.contentsquare.com).
+  description: >-
+    REST API for exporting Contentsquare metrics and raw analytics data. Authentication uses OAuth 2.0
+    client_credentials flow against https://api.contentsquare.com/v1/oauth/token, which returns a JWT
+    access token valid for one hour plus a dynamic regional base URL (for example https://api.eu-west-1.production.contentsquare.com).
   humanURL: https://docs.contentsquare.com/en/api/export/
   baseURL: https://api.eu-west-1.production.contentsquare.com
   tags:
@@ -44,10 +56,10 @@ apis:
     type: GraphQL
 - aid: contentsquare:enrichment-api
   name: Contentsquare Enrichment API
-  description: REST API for sending enrichment data batches into Contentsquare, enabling
-    teams to merge first-party data with captured session data. Uses the same OAuth
-    2.0 client credentials authentication and dynamic regional base URLs as the Data
-    Export API.
+  description: >-
+    REST API for sending enrichment data batches into Contentsquare, enabling teams to merge first-party
+    data with captured session data. Uses the same OAuth 2.0 client credentials authentication and dynamic
+    regional base URLs as the Data Export API.
   humanURL: https://docs.contentsquare.com/en/api/enrichment/
   baseURL: https://enrichment-api.eu-west-1.production.contentsquare.com
   tags:
@@ -59,6 +71,46 @@ apis:
     url: https://docs.contentsquare.com/en/api/enrichment/
   - type: Sending Batches
     url: https://docs.contentsquare.com/en/api/enrichment/sending-enrichment-data-batches-cs/
+- aid: contentsquare:contentsquare-authentication-api
+  name: Contentsquare Authentication API
+  description: The Authentication API from Contentsquare — 1 operation(s) for authentication.
+  humanURL: https://docs.contentsquare.com/en/api/export/
+  baseURL: https://api.eu-west-1.production.contentsquare.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/contentsquare-authentication-api-openapi.yml
+- aid: contentsquare:contentsquare-exports-api
+  name: Contentsquare Exports API
+  description: The Exports API from Contentsquare — 2 operation(s) for exports.
+  humanURL: https://docs.contentsquare.com/en/api/export/
+  baseURL: https://api.eu-west-1.production.contentsquare.com
+  tags:
+  - Exports
+  properties:
+  - type: OpenAPI
+    url: openapi/contentsquare-exports-api-openapi.yml
+- aid: contentsquare:contentsquare-fields-api
+  name: Contentsquare Fields API
+  description: The Fields API from Contentsquare — 3 operation(s) for fields.
+  humanURL: https://docs.contentsquare.com/en/api/export/
+  baseURL: https://api.eu-west-1.production.contentsquare.com
+  tags:
+  - Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/contentsquare-fields-api-openapi.yml
+- aid: contentsquare:contentsquare-runs-api
+  name: Contentsquare Runs API
+  description: The Runs API from Contentsquare — 3 operation(s) for runs.
+  humanURL: https://docs.contentsquare.com/en/api/export/
+  baseURL: https://api.eu-west-1.production.contentsquare.com
+  tags:
+  - Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/contentsquare-runs-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/contentsquare-agentic-access.yml
