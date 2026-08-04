@@ -1,0 +1,20 @@
+{
+  "provider": "contentsquare",
+  "sources": [
+    "contentsquare-authentication-api-openapi.yml",
+    "contentsquare-exports-api-openapi.yml",
+    "contentsquare-fields-api-openapi.yml",
+    "contentsquare-runs-api-openapi.yml"
+  ],
+  "outputs": [
+    "contentsquare-authentication-api-openapi.yml",
+    "contentsquare-exports-api-openapi.yml",
+    "contentsquare-fields-api-openapi.yml",
+    "contentsquare-runs-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
