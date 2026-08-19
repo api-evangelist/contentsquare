@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Contentsquare Data Export Authentication Runs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List successful job runs across all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.contentsquare.com/v1/exports/successful-runs",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List successful job runs across all jobs"
+        },
+        {
+          "info": {
+            "name": "List runs for a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.contentsquare.com/v1/exports/:jobId/runs",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List runs for a job"
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific job run (with file download URLs)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.contentsquare.com/v1/exports/:jobId/runs/:runId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific job run (with file download URLs)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Contentsquare Data Export Authentication Fields API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List exportable fields for a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.contentsquare.com/v1/exportable-fields",
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List exportable fields for a scope"
+        },
+        {
+          "info": {
+            "name": "List custom variables defined for the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.contentsquare.com/v1/custom-vars"
+          },
+          "docs": "List custom variables defined for the project"
+        },
+        {
+          "info": {
+            "name": "List dynamic variable keys captured in a window",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.contentsquare.com/v1/dynamic-var-keys",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List dynamic variable keys captured in a window"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
