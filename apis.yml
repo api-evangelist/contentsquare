@@ -46,6 +46,11 @@ apis:
   - Digital Experience Analytics
   - Data Export
   - Metrics
+  - Authentication
+  tags_raw:
+  - Digital Experience Analytics
+  - Data Export
+  - Metrics
   - OAuth
   properties:
   - type: Documentation
@@ -63,6 +68,10 @@ apis:
   humanURL: https://docs.contentsquare.com/en/api/enrichment/
   baseURL: https://enrichment-api.eu-west-1.production.contentsquare.com
   tags:
+  - Digital Experience Analytics
+  - Data Enrichment
+  - Authentication
+  tags_raw:
   - Digital Experience Analytics
   - Data Enrichment
   - OAuth
@@ -87,6 +96,8 @@ apis:
   humanURL: https://docs.contentsquare.com/en/api/export/
   baseURL: https://api.eu-west-1.production.contentsquare.com
   tags:
+  - Export
+  tags_raw:
   - Exports
   properties:
   - type: OpenAPI
