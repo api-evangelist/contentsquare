@@ -8,6 +8,18 @@ description: Contentsquare is a digital experience analytics platform that captu
   offers Data Export and Enrichment REST APIs authenticated via OAuth 2.0 client credentials
   with dynamic regional base URLs returned at authentication time.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
