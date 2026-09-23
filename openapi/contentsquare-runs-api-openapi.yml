@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Contentsquare Data Export Authentication Runs API
+  title: Contentsquare Data Export Runs API
   description: 'The Contentsquare Data Export API lets you programmatically create export
 
     jobs and retrieve exported files for pageview-level or session-level raw
@@ -9,9 +9,7 @@ info:
 
     and the access token (Bearer) returned at authentication time must be sent
 
-    on every subsequent request.
-
-    '
+    on every subsequent request.'
   version: 1.0.0
   contact:
     name: Contentsquare Developer Documentation
@@ -45,6 +43,8 @@ paths:
       responses:
         '200':
           description: OK
+      operationId: getV1ExportsSuccessfulRuns
+      x-operation-id-source: derived
   /v1/exports/{jobId}/runs:
     get:
       tags:
@@ -75,6 +75,8 @@ paths:
       responses:
         '200':
           description: OK
+      operationId: getV1ExportsByJobIdRuns
+      x-operation-id-source: derived
   /v1/exports/{jobId}/runs/{runId}:
     get:
       tags:
@@ -114,6 +116,8 @@ paths:
                         expires_at:
                           type: string
                           format: date-time
+      operationId: getV1ExportsByJobIdRunsByRunId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

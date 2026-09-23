@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Contentsquare Data Export Authentication Exports API
+  title: Contentsquare Data Export Exports API
   description: 'The Contentsquare Data Export API lets you programmatically create export
 
     jobs and retrieve exported files for pageview-level or session-level raw
@@ -9,9 +9,7 @@ info:
 
     and the access token (Bearer) returned at authentication time must be sent
 
-    on every subsequent request.
-
-    '
+    on every subsequent request.'
   version: 1.0.0
   contact:
     name: Contentsquare Developer Documentation
@@ -70,6 +68,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExportJobList'
+      operationId: getV1Exports
+      x-operation-id-source: derived
     post:
       tags:
       - Exports
@@ -87,6 +87,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExportJob'
+      operationId: postV1Exports
+      x-operation-id-source: derived
   /v1/exports/{jobId}:
     get:
       tags:
@@ -105,29 +107,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExportJob'
+      operationId: getV1ExportsByJobId
+      x-operation-id-source: derived
 components:
   schemas:
-    ExportJob:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - JSONL
-          - CSV
-        scope:
-          type: string
-        frequency:
-          type: string
-        state:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     ExportJobRequest:
       type: object
       required:
@@ -154,6 +137,27 @@ components:
           type: string
         segmentId:
           type: string
+    ExportJob:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - JSONL
+          - CSV
+        scope:
+          type: string
+        frequency:
+          type: string
+        state:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     ExportJobList:
       type: object
       properties:

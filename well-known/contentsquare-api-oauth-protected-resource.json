@@ -1,0 +1,1 @@
+{"resource":"https://api.contentsquare.com/mcp","authorization_servers":["https://api.contentsquare.com"],"jwks_uri":"https://api.contentsquare.com/.well-known/jwks.json","bearer_methods_supported":["header"],"scopes_supported":["metrics"],"resource_documentation":"https://api.contentsquare.com/docs"}
