@@ -70,8 +70,6 @@ apis:
     url: https://docs.contentsquare.com/en/api/export/
   - type: Authentication
     url: https://docs.contentsquare.com/en/api/export/authentication/
-  - url: graphql/contentsquare-graphql.md
-    type: GraphQL
 - aid: contentsquare:enrichment-api
   name: Contentsquare Enrichment API
   description: >-
