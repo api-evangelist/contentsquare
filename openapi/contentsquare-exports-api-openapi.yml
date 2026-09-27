@@ -111,6 +111,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ExportJob:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        format:
+          type: string
+          enum:
+          - JSONL
+          - CSV
+        scope:
+          type: string
+        frequency:
+          type: string
+        state:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     ExportJobRequest:
       type: object
       required:
@@ -137,27 +158,6 @@ components:
           type: string
         segmentId:
           type: string
-    ExportJob:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        format:
-          type: string
-          enum:
-          - JSONL
-          - CSV
-        scope:
-          type: string
-        frequency:
-          type: string
-        state:
-          type: string
-        created_at:
-          type: string
-          format: date-time
     ExportJobList:
       type: object
       properties:
