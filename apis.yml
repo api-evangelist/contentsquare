@@ -44,7 +44,7 @@ tags:
 - User Behavior
 url: https://raw.githubusercontent.com/api-evangelist/contentsquare/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: contentsquare:data-export-api
@@ -134,6 +134,8 @@ apis:
   - type: OpenAPI
     url: openapi/contentsquare-runs-api-openapi.yml
 common:
+- url: https://contentsquare.com/blog/
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/contentsquare-agentic-access.yml
 - type: TrustCenter
