@@ -13,6 +13,9 @@ checked:
 - https://search.maven.org/solrsearch/select
 - google-play/integrations/google-play-integration-edges.yml
 - netlify/integrations/netlify-integration-edges.yml
+- https://hex.pm/api
+- https://packagist.org/packages
+- https://pub.dev/api
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -196,6 +199,54 @@ edges:
   detected_by: mirror-platform-listings.py
   category: Search
   partner_tier: listing
+- partner_name: pub.dev
+  partner: pub-dev
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Dart/Flutter)
+  evidence: https://pub.dev/packages/contentsquare
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: pub.dev (public registry JSON)
+    spec_file: null
+    language: Dart/Flutter
+    packages:
+    - name: contentsquare
+      version: 4.5.2
+      released: '2026-09-28'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/contentsquare
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:contentsquare.com
+      matched_by: domain
+    - name: contentsquare_cli
+      version: 1.1.0
+      released: '2026-08-07'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/contentsquare_cli
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:contentsquare.com
+      matched_by: domain
+    - name: heap_flutter_bridge
+      version: 0.7.2
+      released: '2026-09-24'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/heap_flutter_bridge
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:contentsquare.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-php-dart-elixir-package-registries.py
+    detected: '2026-10-22'
+  detected_by: sweep-php-dart-elixir-package-registries.py
+  first_seen: '2026-10-22'
 source:
 - microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 - slack/integrations/slack-integration-edges.yml
