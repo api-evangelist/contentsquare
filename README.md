@@ -1,4 +1,4 @@
-# Contentsquare (contentsquare)
+# Contentsquare
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,81 +66,123 @@
 
 Contentsquare is a digital experience analytics platform that captures every user interaction on web and mobile properties to surface friction points, conversion blockers, and behavioral insights via session replay, heatmaps, journey analysis, and zone-based analytics. The platform helps product, marketing, and UX teams optimize digital experiences with AI-driven recommendations. Contentsquare offers Data Export and Enrichment REST APIs authenticated via OAuth 2.0 client credentials with dynamic regional base URLs returned at authentication time.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/contentsquare/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/contentsquare/refs/heads/main/apis.yml)
+**Areas:** Digital Experience Analytics · Product Analytics · Session Replay · Heatmaps · Customer Experience · Conversion Optimization · User Behavior
 
-## Scope
+## Contentsquare on APIs.io
 
-- **Type:** Index
+Everything profiled for Contentsquare is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/contentsquare/](https://apis.io/providers/contentsquare/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Digital Experience Analytics
-- Product Analytics
-- Session Replay
-- Heatmaps
-- Customer Experience
-- Conversion Optimization
-- User Behavior
+- [Contentsquare Data Export API](https://apis.io/apis/contentsquare/data-export-api/) — REST API for exporting Contentsquare metrics and raw analytics data. Authentication uses OAuth 2.0 client_credentials flow against…
+- [Contentsquare Enrichment API](https://apis.io/apis/contentsquare/enrichment-api/) — REST API for sending enrichment data batches into Contentsquare, enabling teams to merge first-party data with captured session data. Uses the same OAuth…
+- [Contentsquare Authentication API](https://apis.io/apis/contentsquare/contentsquare-authentication-api/) — The Authentication API from Contentsquare — 1 operation(s) for authentication.
+- [Contentsquare Exports API](https://apis.io/apis/contentsquare/contentsquare-exports-api/) — The Exports API from Contentsquare — 2 operation(s) for exports.
+- [Contentsquare Fields API](https://apis.io/apis/contentsquare/contentsquare-fields-api/) — The Fields API from Contentsquare — 3 operation(s) for fields.
+- [Contentsquare Runs API](https://apis.io/apis/contentsquare/contentsquare-runs-api/) — The Runs API from Contentsquare — 3 operation(s) for runs.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Contentsquare Data Export API
+GraphQL schemas.
 
-REST API for exporting Contentsquare metrics and raw analytics data. Authentication uses OAuth 2.0 client_credentials flow against https://api.contentsquare.com/v1/oauth/token, which returns a JWT access token valid for one hour plus a dynamic regional base URL (for example https://api.eu-west-1.production.contentsquare.com).
+- [Moved to /providers/contentsquare/](https://apis.io/graphqls/contentsquare/contentsquare-graphql/)
 
-- **Human URL:** [https://docs.contentsquare.com/en/api/export/](https://docs.contentsquare.com/en/api/export/)
-- **Base URL:** `https://api.eu-west-1.production.contentsquare.com`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Digital Experience Analytics
-- Data Export
-- Metrics
-- OAuth
+- [contentsquare](https://apis.io/servers/contentsquare/contentsquare/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://docs.contentsquare.com/en/api/export/)
-- [Authentication](https://docs.contentsquare.com/en/api/export/authentication/)
-- [Postman Collection](collections/contentsquare.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/contentsquare.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Contentsquare Enrichment API
+- [Contentsquare Agentic Access](https://apis.io/agentic-access/contentsquare/contentsquare-agentic-access/)
 
-REST API for sending enrichment data batches into Contentsquare, enabling teams to merge first-party data with captured session data. Uses the same OAuth 2.0 client credentials authentication and dynamic regional base URLs as the Data Export API.
+#### Collections (5)
 
-- **Human URL:** [https://docs.contentsquare.com/en/api/enrichment/](https://docs.contentsquare.com/en/api/enrichment/)
-- **Base URL:** `https://enrichment-api.eu-west-1.production.contentsquare.com`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Contentsquare Data Export API](https://apis.io/collections/contentsquare/open-contentsquare/)
+- [Contentsquare Data Export Authentication API](https://apis.io/collections/contentsquare/open-contentsquare-authentication-api/)
+- [Contentsquare Data Export Authentication Exports API](https://apis.io/collections/contentsquare/open-contentsquare-exports-api/)
+- [Contentsquare Data Export Authentication Fields API](https://apis.io/collections/contentsquare/open-contentsquare-fields-api/)
+- [Contentsquare Data Export Authentication Runs API](https://apis.io/collections/contentsquare/open-contentsquare-runs-api/)
 
-- Digital Experience Analytics
-- Data Enrichment
-- OAuth
+#### Security (4)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://docs.contentsquare.com/en/api/enrichment/)
-- [Sending  Batches](https://docs.contentsquare.com/en/api/enrichment/sending-enrichment-data-batches-cs/)
-- [Postman Collection](collections/contentsquare.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/contentsquare.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Contentsquare Authentication](https://apis.io/security/contentsquare/contentsquare-authentication/)
+- [Contentsquare Domain Security](https://apis.io/security/contentsquare/contentsquare-domain-security/)
+- [Contentsquare Trust Center](https://apis.io/security/contentsquare/contentsquare-trust-center/)
+- [Contentsquare Vulnerability Disclosure](https://apis.io/security/contentsquare/contentsquare-vulnerability-disclosure/)
 
-## Common Properties
+## Where to find this API
 
-- [GitHub Organization](https://github.com/contentsquare)
-- [LinkedIn](https://www.linkedin.com/company/contentsquare)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://contentsquare.com)
 - [Documentation](https://docs.contentsquare.com/en/)
 - [Pricing](https://contentsquare.com/pricing/)
-- [Sign Up](https://contentsquare.com/request-demo/)
-- [L L Ms Txt](https://docs.contentsquare.com/llms.txt)
+- [Blog](https://contentsquare.com/blog/)
+- [GitHub](https://github.com/contentsquare)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 32.4** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 46.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 31.6 |
+
+**Agent readiness 47.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/contentsquare/](https://apis.io/providers/contentsquare/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Contentsquare: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/contentsquare/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
